@@ -1,0 +1,15 @@
+{
+	"manifest_version": 3,
+	"name": "Code Bookmarks Homepage",
+	"description": "My personnal bookmarks homepage",
+	"version": "0.0.1",
+	"icons": {
+		"16": "images/icon16.png",
+		"24": "images/icon24.png",
+		"32": "images/icon32.png"
+	},
+	"chrome_url_overrides": {
+		"newtab": "homepage.html"
+	},
+	"permissions": ["bookmarks", "storage"]
+}

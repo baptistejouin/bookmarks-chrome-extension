@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New tab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Roboto+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <h1>
+          <span class="light">👨🏻‍💻</span><span class="dark">🦹🏻‍♀️</span> Hi
+          there<span class="cursor">_</span>
+        </h1>
+        <div class="shorcut__wrapper">
+          <div class="shorcut__pinned">
+            <button id="js-reduce-folder" class="shorcut__item">
+              <span class="icon icon__reduce"></span>
+            </button>
+            <button id="js-toggle-prefers-color-scheme" class="shorcut__item">
+              <span
+                id="js-prefers-color-scheme-icon"
+                class="icon icon__color-scheme-icon"
+              ></span>
+            </button>
+          </div>
+          <a
+            class="shorcut__item"
+            href="https://drive.google.com/drive/folders/0B0vl7-YVCx20R2pYTEdrNEV2YU0?resourcekey=0-6_hbH7fluWErIFATdMm2cg"
+          >
+            <span class="icon icon__bookmark"></span>
+          </a>
+          <a class="shorcut__item" href="https://ent.univ-eiffel.fr/">
+            <span class="icon icon__study"></span>
+          </a>
+          <a class="shorcut__item" href="https://github.com/baptistejouin">
+            <span class="icon icon__github"></span>
+          </a>
+          <a class="shorcut__item" href="https://twitter.com/">
+            <span class="icon icon__twitter"></span>
+          </a>
+        </div>
+        <div class="bookmark" id="js-root-details">
+          <ul></ul>
+        </div>
+      </div>
+    </div>
+    <template id="js-folder-template">
+      <li>
+        <details class="bookmark__item">
+          <summary class="bookmark__item-title"></summary>
+          <ul></ul>
+        </details>
+      </li>
+    </template>
+    <template id="js-link-template">
+      <li>
+        <a href=""></a>
+      </li>
+    </template>
+    <script src="main.js"></script>
+  </body>
+</html>

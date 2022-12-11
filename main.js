@@ -32,12 +32,18 @@ function createFolder(bookmarkItem) {
   summary.textContent =
     bookmarkItem.id == 0 ? "Root" : bookmarkItem.title || "Unnamed folder";
 
-  if (openFolders.includes(bookmarkItem.id)) details.setAttribute("open", true);
+  if (openFolders.includes(bookmarkItem.id)) {
+    details.setAttribute("open", true);
+    details.dataset.isOpen = true;
+  } else {
+    details.dataset.isOpen = false;
+  }
 
   summary.addEventListener("click", () => {
-    details.getAttribute("open")
+    details.dataset.isOpen === "true"
       ? closeFolder(bookmarkItem.id)
       : openFolder(bookmarkItem.id);
+    details.dataset.isOpen = details.dataset.isOpen === "true" ? false : true;
   });
 
   return folderElement;
@@ -48,11 +54,13 @@ function saveToLocalStorage(tag, data) {
 }
 
 function openFolder(id) {
+  console.log("open folder:", id);
   openFolders = [...openFolders, id];
   saveToLocalStorage("openFolder", openFolders);
 }
 
 function closeFolder(id) {
+  console.log("close folder:", id);
   openFolders = openFolders.filter((item) => item !== id);
   saveToLocalStorage("openFolder", openFolders);
 }
@@ -130,11 +138,14 @@ async function init() {
 }
 
 function closeAllFolder() {
-  openFolders = [];
-  localStorage.clear("bookmarks");
-  document
-    .querySelectorAll("details")
-    .forEach((detail) => detail.removeAttribute("open"));
+  saveToLocalStorage("openFolder", []);
+  openFolders.forEach((folderId) => {
+    closeFolder(folderId);
+  });
+  document.querySelectorAll("details").forEach((detail) => {
+    detail.removeAttribute("open");
+    detail.dataset.isOpen = false;
+  });
 }
 
 function toggleColorScheme() {
@@ -144,24 +155,11 @@ function toggleColorScheme() {
   DOMbody.classList.toggle("dark-theme");
 }
 
-// function timeOnTitle() {
-//   const now = new Date();
-//   const hours = `${now.getHours()}`.padStart(2, "0");
-//   const minutes = `${now.getMinutes()}`.padStart(2, "0");
-//   const seconds = `${now.getSeconds()}`.padStart(2, "0");
-//   document.title = `New tab - ${hours}:${minutes}:${seconds}`;
-// }
-
 init();
-// timeOnTitle();
 
 if (JSON.parse(localStorage.getItem("prefersColorScheme")) === 1) {
   toggleColorScheme();
 }
-
-// let timer = setInterval(() => {
-//   timeOnTitle();
-// }, 1000);
 
 reduceFolder.addEventListener("click", closeAllFolder);
 togglePrefersColorScheme.addEventListener("click", toggleColorScheme);
